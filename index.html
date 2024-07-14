@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-by-Moorcam.css">
+    <link rel="stylesheet" href="assets/css/Pretty-Search-Form-.css">
+    <link rel="stylesheet" href="assets/css/Search-Input-Responsive-with-Icon.css">
+    <style>
+        /* Custom styles for search section */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .search-container {
+            display: flex;
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 15px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #212121;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="77">
+    <nav class="navbar navbar-expand-md fixed-top navbar-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">AdhanALERT</a>
+            <button class="navbar-toggler navbar-toggler-right" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item nav-link"><a class="nav-link active" href="#about">Search</a></li>
+                    <li class="nav-item nav-link"><a class="nav-link" href="#download">About</a></li>
+                    <li class="nav-item nav-link"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image: url('assets/img/17c7b7dd5a1f1664ac39fd6f3768bafc.jpg');">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="brand-heading"><br>AdhanAlert<br><br></h1>
+                        <p class="intro-text">Find the salah times in your city below!</p>
+                        <a class="btn btn-link btn-circle" role="button" href="#about"><i class="fa fa-angle-double-down animated"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="text-center content-section" id="about">
+        <div class="container">
+            <h1>Search</h1>
+            <div class="search-container">
+                <input type="text" id="city" name="city" class="search-input" placeholder="Enter City...">
+                <button id="b1" class="search-btn" onclick="getPrayerTimes()">Get Prayer Times</button>
+            </div>
+            <div id="prayer-times"></div>
+        </div>
+        <script src="/index.js"></script>
+        <script>
+            async function getPrayerTimes() {
+                const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+                const city = document.getElementById('city').value;
+                const country = ''; // Optional: specify country if needed
+                const method = 2; // Islamic Society of North America (ISNA) method
+
+                const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&key=${apiKey}`;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.code === 200) {
+                        const timings = data.data.timings;
+                        displayPrayerTimes(timings);
+                    } else {
+                        document.getElementById('prayer-times').innerText = 'Error fetching prayer times';
+                    }
+                } catch (error) {
+                    console.error('Error fetching prayer times:', error);
+                    document.getElementById('prayer-times').innerText = 'Error fetching prayer times';
+                }
+            }
+
+            function displayPrayerTimes(timings) {
+                const prayerTimesDiv = document.getElementById('prayer-times');
+                prayerTimesDiv.innerHTML = `
+                    <h2>Prayer Times</h2>
+                    <p>Fajr: ${timings.Fajr}</p>
+                    <p>Dhuhr: ${timings.Dhuhr}</p>
+                    <p>Asr: ${timings.Asr}</p>
+                    <p>Maghrib: ${timings.Maghrib}</p>
+                    <p>Isha: ${timings.Isha}</p>
+                `;
+            }
+        </script>
+    </section>
+    <section class="text-center download-section content-section" id="download" style="background-image: url('assets/img/348174.jpg');">
+        <div class="container">
+            <div class="col-lg-8 mx-auto">
+                <h1>About</h1>
+                <p>Welcome to AdhanAlert, your go-to resource for accurate and timely prayer times. Our mission is to provide you with precise prayer times and reminders, ensuring you never miss a prayer.<br> <br> Allah's Messenger (ﷺ) Said: <br> "If there was a river at the door of anyone of you and he took a bath in it five times a day would you notice any dirt on him?" They said, "Not a trace of dirt would be left." The Prophet (ﷺ) added, "That is the example of the five prayers with which Allah blots out (annuls) evil deeds."<br> <br> Sahih al-Bukhari 528 <br> </p>
+            </div>
+        </div>
+    </section>
+    <section class="text-center content-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <section class="shadow contact-clean" style="background: rgb(0,0,0);">
+                        <form action="https://formspree.io/f/mdoqqvyz"method="POST"action="https://formspree.io/f/mdoqqvyz"method="POST" class="bg-light border rounded border-secondary shadow-lg" method="post" style="background: rgb(248,248,249);">
+                            <h2 class="text-center">Contact Us</h2>
+                            <div class="form-group mb-3"><input class="form-control" type="text" name="name" placeholder="Name"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" name="phone" placeholder="Phone" inputmode="tel"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                            <div class="form-group mb-3"><textarea class="form-control" name="message" placeholder="Message" rows="4"></textarea></div>
+                            <div class="form-group mb-3"><button class="btn btn-primary" type="submit">Send</button></div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container text-center">
+            <p>Copyright © AdhanAlert 2024</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+</body>
+
+</html>

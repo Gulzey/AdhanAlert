@@ -1,0 +1,14 @@
+{
+    "name": "salahtimes",
+    "version": "1.0.0",
+    "description": "A simple application deployed on Heroku",
+    "main": "Landing.js",
+    "scripts": {
+      "start": "node Landing.js"
+    },
+    "author": "G3",
+    "license": "MIT",
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
