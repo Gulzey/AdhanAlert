@@ -1,10 +1,31 @@
+<!--
+                                                                                ,--,                            ,----, 
+                                  ,--,                      ,--.             ,---.'|                          ,/   .`| 
+   ,---,          ,---,         ,--.'|  ,---,             ,--.'|  ,---,      |   | :      ,---,,-.----.     ,`   .'  : 
+  '  .' \       .'  .' `\    ,--,  | : '  .' \        ,--,:  : | '  .' \     :   : |    ,'  .' \    /  \  ;    ;     / 
+ /  ;    '.   ,---.'     \,---.'|  : '/  ;    '.   ,`--.'`|  ' :/  ;    '.   |   ' :  ,---.'   ;   :    .'___,/    ,'  
+:  :       \  |   |  .`\  |   | : _' :  :       \  |   :  :  | :  :       \  ;   ; '  |   |   .|   | .\ |    :     |   
+:  |   /\   \ :   : |  '  :   : |.'  :  |   /\   \ :   |   \ | :  |   /\   \ '   | |__:   :  |-.   : |: ;    |.';  ;   
+|  :  ' ;.   :|   ' '  ;  |   ' '  ; |  :  ' ;.   :|   : '  '; |  :  ' ;.   :|   | :.':   |  ;/|   |  \ `----'  |  |   
+|  |  ;/  \   '   | ;  .  '   |  .'. |  |  ;/  \   '   ' ;.    |  |  ;/  \   '   :    |   :   .|   : .  /   '   :  ;   
+'  :  | \  \ ,|   | :  |  |   | :  | '  :  | \  \ ,|   | | \   '  :  | \  \ ,|   |  ./|   |  |-;   | |  \   |   |  '   
+|  |  '  '--' '   : | /  ;'   : |  : |  |  '  '--' '   : |  ; .|  |  '  '--' ;   : ;  '   :  ;/|   | ;\  \  '   :  |   
+|  :  :       |   | '` ,/ |   | '  ,/|  :  :       |   | '`--' |  :  :       |   ,/   |   |    :   ' | \.'  ;   |.'    
+|  | ,'       ;   :  .'   ;   : ;--' |  | ,'       '   : |     |  | ,'       '---'    |   :   .:   : :-'    '---'      
+`--''         |   ,.'     |   ,/     `--''         ;   |.'     `--''                  |   | ,' |   |.'                 
+              '---'       '---'                    '---'                              `----'   `---'                   
+                                                 
+              By: Gulied Abdi
+-->
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>AdhanAlert</title>
+    <link rel="icon" href="output-onlinepngtools.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700&amp;display=swap">
@@ -13,7 +34,6 @@
     <link rel="stylesheet" href="assets/css/Pretty-Search-Form-.css">
     <link rel="stylesheet" href="assets/css/Search-Input-Responsive-with-Icon.css">
     <style>
-        /* Custom styles for search section */
         .content-section {
             padding: 80px 0;
         }
@@ -101,10 +121,10 @@
         <script src="/index.js"></script>
         <script>
             async function getPrayerTimes() {
-                const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+                const apiKey = 'YOUR_API_KEY'; 
                 const city = document.getElementById('city').value;
-                const country = ''; // Optional: specify country if needed
-                const method = 2; // Islamic Society of North America (ISNA) method
+                const country = ''; 
+                const method = 2; 
 
                 const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&key=${apiKey}`;
 
@@ -173,3 +193,4 @@
 </body>
 
 </html>
+
