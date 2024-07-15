@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="assets/css/Contact-Form-by-Moorcam.css">
     <link rel="stylesheet" href="assets/css/Pretty-Search-Form-.css">
     <link rel="stylesheet" href="assets/css/Search-Input-Responsive-with-Icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .content-section {
             padding: 80px 0;
@@ -115,6 +116,7 @@
             <div class="search-container">
                 <input type="text" id="city" name="city" class="search-input" placeholder="Enter City...">
                 <button id="b1" class="search-btn" onclick="getPrayerTimes()">Get Prayer Times</button>
+                <button id="locate-btn" class="search-btn" onclick="getLocation()"><i class="fa-solid fa-location-dot"></i></button>
             </div>
             <div id="prayer-times"></div>
         </div>
@@ -155,6 +157,30 @@
                     <p>Isha: ${timings.Isha}</p>
                 `;
             }
+
+            function getCoordinates() {
+                return new Promise((resolve, reject) => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(position => {
+                            resolve({
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude
+                            });
+                        }, reject);
+                    } else {
+                        reject(new Error('Geolocation is not supported by this browser.'));
+                    }
+                });
+            }
+
+            function getLocation() {
+                getCoordinates()
+                    .then(coords => getPrayerTimes())
+                    .catch(error => {
+                        console.error('Error getting location:', error);
+                        document.getElementById('prayer-times').innerText = 'Error getting location';
+                    });
+            }
         </script>
     </section>
     <section class="text-center download-section content-section" id="download" style="background-image: url('assets/img/348174.jpg');">
@@ -193,4 +219,5 @@
 </body>
 
 </html>
+
 
