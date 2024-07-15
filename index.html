@@ -122,13 +122,34 @@
         </div>
         <script src="/index.js"></script>
         <script>
+            
+            const apiKey = 'YOUR_API_KEY';
+            const method = 2;
+
             async function getPrayerTimes() {
-                const apiKey = 'YOUR_API_KEY'; 
                 const city = document.getElementById('city').value;
-                const country = ''; 
-                const method = 2; 
+                const country = '';
 
                 const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&key=${apiKey}`;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.code === 200) {
+                        const timings = data.data.timings;
+                        displayPrayerTimes(timings);
+                    } else {
+                        document.getElementById('prayer-times').innerText = 'Error fetching prayer times';
+                    }
+                } catch (error) {
+                    console.error('Error fetching prayer times:', error);
+                    document.getElementById('prayer-times').innerText = 'Error fetching prayer times';
+                }
+            }
+
+            async function getPrayerTimesByCoords(latitude, longitude) {
+                const url = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}&key=${apiKey}`;
 
                 try {
                     const response = await fetch(url);
@@ -175,7 +196,7 @@
 
             function getLocation() {
                 getCoordinates()
-                    .then(coords => getPrayerTimes())
+                    .then(coords => getPrayerTimesByCoords(coords.latitude, coords.longitude))
                     .catch(error => {
                         console.error('Error getting location:', error);
                         document.getElementById('prayer-times').innerText = 'Error getting location';
