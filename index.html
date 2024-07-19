@@ -121,7 +121,6 @@
         </div>
         <script src="/index.js"></script>
         <script>
-            
             const apiKey = 'YOUR_API_KEY';
             const method = 2;
 
@@ -168,6 +167,26 @@
 
             function displayPrayerTimes(timings) {
                 const prayerTimesDiv = document.getElementById('prayer-times');
+
+                // Convert Maghrib time today and Fajr time tomorrow to Date objects
+                const maghribTime = new Date(`1970-01-01T${timings.Maghrib}:00Z`);
+                const fajrTime = new Date(`1970-01-02T${timings.Fajr}:00Z`);
+
+                // Calculate the difference in milliseconds
+                const timeDiff = fajrTime - maghribTime;
+
+                // Calculate one-third of this time difference
+                const oneThirdDiff = timeDiff / 3;
+
+                // Calculate Isha Prime time as one-third of the way between Maghrib and Fajr
+                const ishaPrimeTime = new Date(maghribTime.getTime() + oneThirdDiff);
+
+                // Format the times for display
+                const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+                const maghribFormatted = maghribTime.toLocaleTimeString('en-GB', options);
+                const fajrFormatted = fajrTime.toLocaleTimeString('en-GB', options);
+                const ishaPrimeFormatted = ishaPrimeTime.toLocaleTimeString('en-GB', options);
+
                 prayerTimesDiv.innerHTML = `
                     <h2>Prayer Times</h2>
                     <p>Fajr: ${timings.Fajr}</p>
@@ -175,6 +194,7 @@
                     <p>Asr: ${timings.Asr}</p>
                     <p>Maghrib: ${timings.Maghrib}</p>
                     <p>Isha: ${timings.Isha}</p>
+                    <p>Isha Prime: ${ishaPrimeFormatted}</p>
                 `;
             }
 
