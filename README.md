@@ -1,3 +1,3 @@
 # AdhanAlert
 
-The site is live at: WWW.AdhanAlert.vercel.app
+The site is live at: (https://adhanalert.vercel.app/)
