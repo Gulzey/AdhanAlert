@@ -40,6 +40,7 @@
         }
 
         .search-container {
+            
             max-width: 500px;
             margin: auto;
             text-align: center;
@@ -121,6 +122,7 @@
         </div>
         <script src="/index.js"></script>
         <script>
+            
             const apiKey = 'YOUR_API_KEY';
             const method = 2;
 
@@ -167,26 +169,6 @@
 
             function displayPrayerTimes(timings) {
                 const prayerTimesDiv = document.getElementById('prayer-times');
-
-                // Convert Maghrib time today and Fajr time tomorrow to Date objects
-                const maghribTime = new Date(`1970-01-01T${timings.Maghrib}:00Z`);
-                const fajrTime = new Date(`1970-01-02T${timings.Fajr}:00Z`);
-
-                // Calculate the difference in milliseconds
-                const timeDiff = fajrTime - maghribTime;
-
-                // Calculate one-third of this time difference
-                const oneThirdDiff = timeDiff / 3;
-
-                // Calculate Isha Prime time as one-third of the way between Maghrib and Fajr
-                const ishaPrimeTime = new Date(maghribTime.getTime() + oneThirdDiff);
-
-                // Format the times for display
-                const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-                const maghribFormatted = maghribTime.toLocaleTimeString('en-GB', options);
-                const fajrFormatted = fajrTime.toLocaleTimeString('en-GB', options);
-                const ishaPrimeFormatted = ishaPrimeTime.toLocaleTimeString('en-GB', options);
-
                 prayerTimesDiv.innerHTML = `
                     <h2>Prayer Times</h2>
                     <p>Fajr: ${timings.Fajr}</p>
@@ -194,7 +176,6 @@
                     <p>Asr: ${timings.Asr}</p>
                     <p>Maghrib: ${timings.Maghrib}</p>
                     <p>Isha: ${timings.Isha}</p>
-                    <p>Isha Prime: ${ishaPrimeFormatted}</p>
                 `;
             }
 
@@ -227,7 +208,8 @@
         <div class="container">
             <div class="col-lg-8 mx-auto">
                 <h1>About</h1>
-                <p>Welcome to AdhanAlert, your go-to resource for accurate and timely prayer times. Our mission is to provide you with precise prayer times and reminders, ensuring you never miss a prayer.<br> <br> Allah's Messenger (ﷺ) Said: <br> "If there was a river at the door of anyone of you and he took a bath in it five times a day would you notice any dirt on him?" They said, "Not a trace of dirt would be left." The Prophet (ﷺ) added, "That is the example of the five prayers with which Allah blots out (annuls) evil deeds."<br> <br> Sahih al-Bukhari 528 <br> </p>
+                <p>Welcome to AdhanAlert, your go-to resource for accurate and timely prayer times. Our mission is to provide you with precise prayer times and reminders, ensuring you never miss a prayer.<br> <br> Allah's Messenger (ﷺ) Said: <br> "If there was a river at the door of anyone of you and he took a bath in it five times a day would you notice any dirt on him?" They said, "Not a trace of dirt would be left." The Prophet (ﷺ) added, "That is the example of the five prayers with which Allah blots out (annuls) evil deeds."<br> <br> Sahih al-Bukhari 528 <br> <br>Aisha R.A reported: <br>The Messenger of Allah, peace and blessings be upon him, held back the evening prayer one night until most people had retired for the night.Then, the Prophet came out and performed the prayer,<br> saying, “Verily, this is the proper time were it not hardship upon my nation.” <br> <br> Sahih Muslim 638
+                </p>
             </div>
         </div>
     </section>
@@ -259,5 +241,6 @@
 </body>
 
 </html>
+
 
 
